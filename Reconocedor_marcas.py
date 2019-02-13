@@ -7,18 +7,9 @@ import uuid
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
 db = pymysql.connect("Localhost","root","","bd_fluorescentes")
 cursor = db.cursor()
-#cap = cv2.VideoCapture(0)
-#leido, frame = cap.read()
-#if leido == True:
-#	nombre_foto = str(uuid.uuid4()) + ".png" # uuid4 regresa un objeto, no una cadena. Por eso lo convertimos
-#	cv2.imwrite(nombre_foto, frame)
-#	print("Foto tomada correctamente con el nombre {}".format(nombre_foto))
-#else:
-#	print("Error al acceder a la cámara")
-#cap.release()
-im = Image.open("pruebaTUBO.jpg")
+im = Image.open("pruebaPreparado/1.jpg")
 texto = pytesseract.image_to_string(im)
-#print(texto.encode("utf-8"))
+print(texto.encode("utf-8"))
 cursor.execute("SELECT * FROM marca_prueba_small WHERE id_marca =1")
 for row in cursor.fetchall():
 	cmpAnterior=SM(None, row[1], texto).ratio()
